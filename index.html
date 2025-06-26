@@ -1,0 +1,72 @@
+<!-- TODO: If there no data or anything to look up hide the necessary information and show it once the user click get weather -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TainQi Saito</title>
+    <link rel="stylesheet" href="../style/weatherStyle.css" />
+  </head>
+  <body>
+    <div class="news-container">
+      <div class="background-container fade-in"></div>
+
+      <div class="weather-page-container">
+        <div class="weather-condition-container">
+          <div class="location-container">
+            <h1 id="display-weather-area"></h1>
+
+            <div class="area-container">
+              <img id="area-image" src="/location-on.svg" alt="" />
+
+              <p id="display-weather-country"></p>
+              <p id="display-weather-time"></p>
+            </div>
+          </div>
+
+          <div class="input-container">
+            <input
+              type="text"
+              id="weather-input"
+              placeholder="Input an area or a place"
+            />
+            <button id="get-weather-button">Get Weather</button>
+          </div>
+
+          <div class="nav-bar-container">
+            <button id="nav-weather-button">WEATHER</button>
+            <button id="nav-news-button">NEWS AND EVENT</button>
+          </div>
+        </div>
+
+        <div class="weather-details-container">
+          <div class="current-details-container">
+            <div class="detail-left-side">
+              <h1 id="display-weather-temperature"></h1>
+              <p id="display-weather-humidity"></p>
+            </div>
+
+            <div class="detail-right-side">
+              <img
+                id="display-weather-image"
+                style="display: none"
+                src="https://openweathermap.org/img/wn/10d@2x.png"
+                alt=""
+              />
+              <p id="display-weather-condition"></p>
+            </div>
+          </div>
+
+          <div class="forecast-details-container"></div>
+        </div>
+      </div>
+
+      <div class="error-container" style="display: none">
+        <p id="display-error">Error</p>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="src/pageBackground.js"></script>
+  <script type="module" src="src/weatherApi.js"></script>
+</html>
