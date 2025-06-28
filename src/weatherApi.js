@@ -69,16 +69,21 @@ function getCountryData(functionData) {
   countryData = functionData;
 }
 
-// Routing and Getting the value
-navNewsButton.addEventListener("click", function () {
-  console.log(countryData);
-  window.location.href = `../app/newsPage.html?countryName=${encodeURIComponent(countryData)}&countryInput=${encodeURIComponent(weatherInput.value)}`
-})
+let countryTime = "";
+function getCountryTime(functionTime) {
+  countryTime = functionTime
+}
 
-navWeatherButton.addEventListener("click", function () {
-  window.location.href = `../app/weatherPage.html?countryInput=${encodeURIComponent(weatherInput.value)}`;
-})
+navNewsButton.addEventListener("click", async function () {
+  const transitionPage = document.querySelector(".transition-swipe");
+  transitionPage.classList.remove("nonactive");
+  transitionPage.classList.add("active");
 
+  // Waiting for the Animation to End and Routing and Getting the value
+  transitionPage.addEventListener('animationend', () => {
+    window.location.href = `/newsPage.html?countryName=${encodeURIComponent(countryData)}&countryInput=${encodeURIComponent(weatherInput.value)}&countryTime=${encodeURIComponent(countryTime)}`
+  })
+})
 
 // Display the data to the Web
 function displayWeatherData(wData) {
@@ -113,11 +118,28 @@ function displayWeatherData(wData) {
   displayNavBar.style.display = "flex";
   displayDetail.style.display = "flex";
 
+  // Display Data
   displayCountry.innerText = wData.sys.country; // print out the country.
   displayArea.innerText = wData.name; // print out the name.
-  displayTemperature.innerText = `${calculateTemp.toFixed(2)}°`; // print out the temperature.
-  displayHumidity.innerText = `${wData.main.humidity}% Humdity`; // print out the humidity.
-  displayWeatherCon.innerText = wData.weather[0].main; // print out the weather.
+
+  const displayCurrent = document.querySelector('.current-details-container')
+  displayCurrent.innerHTML =
+  /*html*/`
+  <div class="detail-left-side">
+    <h1 id="display-weather-temperature">${calculateTemp.toFixed(2)}°</h1>
+    <p id="display-weather-humidity">${wData.main.humidity}% Humdity</p>
+  </div>
+
+  <div class="detail-right-side">
+    <img
+      id="display-weather-image"
+      src="https://openweathermap.org/img/wn/${wData.weather[0].icon}@2x.png"
+      alt=""
+    />
+    <p id="display-weather-condition">${wData.weather[0].main}</p>
+  </div>
+  `
+
 }
 
 function displayForcastData(fData) {
@@ -138,6 +160,7 @@ function displayForcastData(fData) {
 
   forecastContainer.innerHTML = storeForecastData;
 }
+
 // Get Current Time
 // TODO: Put Error Handler Here
 function getCurrentTime(offsetSeconds = 0) {
@@ -154,7 +177,8 @@ function getCurrentTime(offsetSeconds = 0) {
   }
 
   displayCountryTime.innerHTML = `${formatTime} ${timePeriod}`;
-  getBackground(Hourtime)
+  getBackground(Hourtime);
+  getCountryTime(Hourtime);
 }
 
 // Handling Error

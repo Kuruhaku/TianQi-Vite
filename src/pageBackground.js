@@ -1,5 +1,7 @@
 import { DateTime } from "luxon";
+import Swup from "swup";
 
+const swup = new Swup();
 const weatherBG = document.querySelector(".background-container");
 
 // Only render the default background base on local time.
@@ -13,18 +15,19 @@ export function getBackground(hour) {
 }
 
 async function setBackground(svg) {
-  if (!weatherBG) return;
-
-  weatherBG.classList.remove('fade-in');
-  weatherBG.classList.add('fade-out');
-
   // Wait for the fade-out transition to finish
-  weatherBG.addEventListener('transitionend', function handler() {
-    weatherBG.removeEventListener('transitionend', handler);
+  if (weatherBG.classList.contains('nofading')) {
+    weatherBG.classList.remove('nofading');
+    weatherBG.classList.add('fading');
     weatherBG.innerHTML = svg;
-    weatherBG.classList.remove('fade-out');
-    weatherBG.classList.add('fade-in');
-  }, { once: true });
+
+    weatherBG.addEventListener('animationend', function () {
+      weatherBG.classList.remove('fading');
+      weatherBG.classList.add('nofading');
+    })
+  } else {
+    weatherBG.innerHTML = svg;
+  }
 }
 
 function dayBackground() {

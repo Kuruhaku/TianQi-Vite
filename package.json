@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "full-icu": "^1.5.0",
-    "luxon": "^3.6.1"
+    "luxon": "^3.6.1",
+    "swup": "^4.8.2"
   }
 }

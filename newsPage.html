@@ -5,48 +5,50 @@
     <meta name="viewport" content="width=device-widt, initial-scale=1.0" />
     <title>News Page</title>
     <link rel="stylesheet" href="../style/newsStyle.css" />
+    <script type="module" src="/src/pageAnimation.js"></script>
   </head>
   <body>
     <div class="background-container"></div>
+    <div class="transition-swipe nonactive">
+      <div class="news-page-container">
+        <div class="news-nav-bar">
+          <!-- <a href="index.html"><button>WEATHER</button></a> -->
+          <button id="nav-weather-button">WEATHER</button>
+        </div>
 
-    <div class="news-page-container">
-      <div class="news-nav-bar">
-        <button id="nav-weather-button">WEATHER</button>
-        <button id="nav-news-button">NEWS AND EVENT</button>
-      </div>
-
-      <div class="news-container">
-        <div class="self-news-container">
-          <div class="news-details">
-            <div class="news-source">
-              <!-- 12px -->
-              <img src="../image//DummyImage.jpg" alt="Placeholder Image" />
-              <p>•</p>
-              <p>Placeholder Source Name</p>
+        <div class="news-container">
+          <div class="self-news-container">
+            <div class="news-image">
+              <!-- <img src="/DummyImage.jpg" alt="" /> -->
             </div>
-            <div class="news-title">
-              <!-- 20px -->
-              <a href="">Placeholder News Title</a>
+            <div class="news-details">
+              <div class="news-source">
+                <!-- 12px -->
+                <!-- <img src="/DummyImage.jpg" alt="Placeholder Image" /> -->
+                <!-- <p>•</p>
+                <p>Placeholder Source Name</p> -->
+              </div>
+              <div class="news-title">
+                <!-- 20px -->
+                <!-- <a href="">Placeholder News Title</a> -->
+              </div>
+              <div class="news-description">
+                <!-- 14px -->
+                <!-- <p>Placeholder description</p> -->
+              </div>
+              <div class="news-publishAt">
+                <!-- 14px
+                <p>Placeholder creator</p>
+                <p>•</p>
+                <p>Placeholder publishedAt</p> -->
+              </div>
             </div>
-            <div class="news-description">
-              <!-- 14px -->
-              <p>Placeholder description</p>
-            </div>
-            <div class="news-publishAt">
-              <!-- 14px -->
-              <p>Placeholder creator</p>
-              <p>•</p>
-              <p>Placeholder publishedAt</p>
-            </div>
-          </div>
-          <div class="news-image">
-            <img src="../image/DummyImage.jpg" alt="" />
           </div>
         </div>
       </div>
     </div>
 
-    <script src="../scripts/pageBackgound.js"></script>
-    <script src="../scripts/newsApi.js"></script>
+    <script defer type="module" src="/src/pageBackground.js"></script>
+    <script defer type="module" src="/src/newsApi.js"></script>
   </body>
 </html>

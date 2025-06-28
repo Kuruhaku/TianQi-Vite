@@ -4,23 +4,30 @@
 // TODO: News: author, content, description, publishedAt, source, title, url, urlToImage.
 // TODO: If there is no image change image url
 
+import { getBackground } from "./pageBackground";
+
 // Global Varrible
 const navWeatherButton = document.querySelector("#nav-weather-button");
-const navNewsButton = document.querySelector("#nav-news-button");
 
 // Getting the value;
 const urlParam = new URLSearchParams(window.location.search);
 const receivedCountryName = urlParam.get('countryName');
 const receivedCountryInput = urlParam.get('countryInput');
+const receivedCountryTime = urlParam.get('countryTime')
 
 // Routing and Getting the value;
-navNewsButton.addEventListener("click", function () {
-  window.location.href = `/newsPage.html?countryName=${encodeURIComponent(receivedCountryName)}&countryInput=${encodeURIComponent(receivedCountryInput)}`
+navWeatherButton.addEventListener("click", function () {
+  const transitionPage = document.querySelector(".transition-swipe")
+  transitionPage.classList.remove('nonactive');
+  transitionPage.classList.add('active');
+
+  transitionPage.addEventListener('animationend', function () {
+    window.location.href = `/index.html?countryName=${encodeURIComponent(receivedCountryName)}&countryInput=${encodeURIComponent(receivedCountryInput)}`;
+  })
+
 })
 
-navWeatherButton.addEventListener("click", function () {
-  window.location.href = `../app/weatherPage.html?countryName=${encodeURIComponent(receivedCountryName)}&countryInput=${encodeURIComponent(receivedCountryInput)}`;
-})
+getBackground(receivedCountryTime);
 
 // Check if there is user value
 if (!receivedCountryName) {
@@ -58,9 +65,13 @@ function displayNews(news) {
       storeNews +=
       /*html*/`
       <div class="self-news-container">
+        <div class="news-image">
+          <img src="${newsIndex.image_url}" onerror='this.src="/DummyImage.jpg"' />
+        </div>
+
         <div class="news-details">
           <div class="news-source">
-            <img src="${newsIndex.source_icon}" onerror='this.src="../image/DummyImage.jpg"' />
+            <img src="${newsIndex.source_icon}" onerror='this.src="/DummyImage.jpg"' />
             <p>•</p>
             <p>${newsIndex.source_name ?? "There is no source name"}</p>
           </div>
@@ -78,10 +89,6 @@ function displayNews(news) {
             <p>•</p>
             <p>${newsIndex.pubDate ?? "There is no date"}</p>
           </div>
-        </div>
-
-        <div class="news-image">
-          <img src="${newsIndex.image_url}" onerror='this.src="../image/DummyImage.jpg"' />
         </div>
       </div>
       `

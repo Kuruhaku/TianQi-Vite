@@ -14,6 +14,10 @@ body {
   font-weight: 400;
 }
 
+main {
+  height: 100vh;
+}
+
 .background-container {
   position: relative;
   overflow: hidden;
@@ -31,22 +35,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin: 15px 30px;
-  position: sticky;
-  top: 0;
 }
 
 .news-nav-bar button {
-  width: 49%;
   background-color: transparent;
+  width: 100%;
   padding: 10px 0px;
   color: white;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 700;
-  border: 1px solid white;
+  border: none;
+  border-top: 5px solid white;
   cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.news-nav-bar button:hover {
+  color: black;
+  box-shadow: 0 0 10px 20px white inset, 0 0 10px 1px #21cbf3;
 }
 
 /* News Details */
@@ -59,16 +66,16 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   margin: 10px 10px 15px 10px;
   border: 1px solid white;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.9);
-  padding: 10px 20px;
 }
 
 .news-details {
   width: 80%;
+  padding: 0px 20px;
   font-family: inherit;
 }
 
@@ -89,10 +96,22 @@ body {
 }
 
 /* News Title */
-.news-title {
+.news-title a {
+  color: #99c3ff;
   font-size: 20px;
   font-weight: 700;
   font-family: inherit;
+}
+
+.news-title a {
+  color: #99c3ff;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.news-title a:visited {
+  color: #c58af9;
 }
 
 /* News Description */
@@ -109,6 +128,7 @@ body {
   --line-height: 1.4;
   max-height: calc(var(--max-line) * 1em * var(--line-height));
   line-height: var(--line-height);
+  text-align: justify;
 }
 
 /* News PublishAt */
@@ -126,13 +146,32 @@ body {
 }
 
 /* News Image Container */
+.news-image {
+  width: 300px;
+  height: 200px;
+}
 
 .news-image img {
-  border: 1px solid white;
   border-radius: 10px;
-  width: 170px;
-  height: 170px;
-  margin: 0px 10px;
-  object-fit: cover;
+  width: 300px;
+  height: 200px;
+  object-fit: f;
   align-items: center;
+}
+
+/* Animation */
+.transition-swipe.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.5s ease-out;
+  animation: fadeOut 1s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
 }
