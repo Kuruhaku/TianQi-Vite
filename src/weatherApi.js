@@ -137,12 +137,12 @@ function displayWeatherData(wData) {
 
   <div class="detail-grid" style="grid-area: box-3">
     <img src="/air.svg" alt="" />
-    <p id="display-weather-temperature">${(wData.main.temp - 273.15).toFixed(2)}°</p>
+    <p id="display-weather-temperature">Temp: ${(wData.main.temp - 273.15).toFixed(2)}°</p>
   </div>
 
   <div class="detail-grid" style="grid-area: box-4">
     <img src="/eco.svg" alt="" />
-    <p id="display-weather-humidity">${wData.main.humidity}% </p>
+    <p id="display-weather-humidity">Humidity: ${wData.main.humidity}% </p>
   </div>
 
   <div class="detail-grid" style="grid-area: box-5">
@@ -152,7 +152,7 @@ function displayWeatherData(wData) {
 
   <div class="detail-grid" style="grid-area: box-6">
     <img src="/pressure.svg" alt="" />
-    <p id="display-weather-pressure">${wData.main.pressure}hpa</p>
+    <p id="display-weather-pressure">Pressure: ${wData.main.pressure} hpa</p>
   </div>
   `
 }

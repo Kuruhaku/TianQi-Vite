@@ -189,7 +189,7 @@ body {
 
 /* Weather Detail */
 .weather-details-container {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
   flex-direction: row;
   justify-content: space-evenly;
