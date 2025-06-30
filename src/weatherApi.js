@@ -12,7 +12,6 @@ const getWeatherButton = document.querySelector("#get-weather-button");
 const weatherInput = document.querySelector("#weather-input");
 const showError = document.querySelector("#display-error");
 const errorContainer = document.querySelector(".error-container");
-const navWeatherButton = document.querySelector("#nav-weather-button");
 const navNewsButton = document.querySelector("#nav-news-button");
 
 // Get value from the URL (Must fix this becuase of the new API);
@@ -46,7 +45,7 @@ async function getWeatherData(userInput) {
   const response = await fetch(`http://api.openweathermap.org/data/2.5/weather/?q=${userInput}&appid=${apiKey}`);
 
   if (!response.ok) { // Checking if there 404 Not Found
-    displayError("This data is not present");
+    displayError(`⚠️ Weather data not found`);
   } else {
     const data = await response.json();
     try {
@@ -90,9 +89,6 @@ function displayWeatherData(wData) {
   // Varriable for Displaying
   const displayCountry = document.querySelector("#display-weather-country");
   const displayArea = document.querySelector("#display-weather-area");
-  const displayTemperature = document.querySelector("#display-weather-temperature");
-  const displayHumidity = document.querySelector("#display-weather-humidity");
-  const displayWeatherCon = document.querySelector("#display-weather-condition");
 
   // Varriable for style modification
   const displayAreaImage = document.querySelector('#area-image');
@@ -107,7 +103,9 @@ function displayWeatherData(wData) {
   if (!wData || wData.main.temp === undefined || wData.sys.country === undefined || wData.name === undefined || wData.main.humidity === undefined || wData.weather[0].main === undefined) {
     console.log('There a Null Data')
   }
-  const calculateTemp = wData.main.temp - 273.15
+
+  const nowTime = DateTime.utc().plus({ seconds: wData.timezone });
+  const formatNow = nowTime.toFormat('yyyy LLL dd (HH:mm:ss)');
 
   // Style Modification
   errorContainer.style.display = "none";
@@ -125,21 +123,38 @@ function displayWeatherData(wData) {
   const displayCurrent = document.querySelector('.current-details-container')
   displayCurrent.innerHTML =
   /*html*/`
-  <div class="detail-left-side">
-    <h1 id="display-weather-temperature">${calculateTemp.toFixed(2)}°</h1>
-    <p id="display-weather-humidity">${wData.main.humidity}% Humdity</p>
+  <div class="time-grid" style="grid-area: box-1">
+    <p id="display-current-time">${formatNow}</p>
   </div>
 
-  <div class="detail-right-side">
+  <div class="image-grid" style="grid-area: box-2">
     <img
       id="display-weather-image"
       src="https://openweathermap.org/img/wn/${wData.weather[0].icon}@2x.png"
-      alt=""
     />
     <p id="display-weather-condition">${wData.weather[0].main}</p>
   </div>
-  `
 
+  <div class="detail-grid" style="grid-area: box-3">
+    <img src="/air.svg" alt="" />
+    <p id="display-weather-temperature">${(wData.main.temp - 273.15).toFixed(2)}°</p>
+  </div>
+
+  <div class="detail-grid" style="grid-area: box-4">
+    <img src="/eco.svg" alt="" />
+    <p id="display-weather-humidity">${wData.main.humidity}% </p>
+  </div>
+
+  <div class="detail-grid" style="grid-area: box-5">
+    <img src="/air.svg" alt="" />
+    <p id="display-weather-feels">Feels Like: ${(wData.main.feels_like - 273.15).toFixed(2)}°</p>
+  </div>
+
+  <div class="detail-grid" style="grid-area: box-6">
+    <img src="/pressure.svg" alt="" />
+    <p id="display-weather-pressure">${wData.main.pressure}hpa</p>
+  </div>
+  `
 }
 
 function displayForcastData(fData) {
@@ -153,7 +168,7 @@ function displayForcastData(fData) {
     <div class="day-forecast-details">
       <p class="week-day">${fData.list[newDayArray[i]].dt_txt}</p>
       <img src="https://openweathermap.org/img/wn/${getWeatherIcon}@2x.png"/>
-      <p class="forecast-temperature">${(fData.list[newDayArray[i]].main.temp - 273.15).toFixed(2)}</p>
+      <p class="forecast-temperature">${(fData.list[newDayArray[i]].main.temp - 273.15).toFixed(2)}°</p>
     </div>
     `
   }

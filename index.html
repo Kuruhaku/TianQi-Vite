@@ -25,36 +25,57 @@
               </div>
             </div>
 
-            <div class="input-container">
-              <input
-                type="text"
-                id="weather-input"
-                placeholder="Input an area or a place"
-              />
-              <button id="get-weather-button">Get Weather</button>
+            <div class="input-glass">
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="weather-input"
+                  placeholder="Enter city or country"
+                />
+                <div class="error-container" style="display: none">
+                  <p id="display-error"></p>
+                </div>
+                <button id="get-weather-button">Get Weather</button>
+              </div>
             </div>
 
             <div class="nav-bar-container">
-              <!-- <a href="newsPage.html"> <button>NEWS AND EVENT</button></a> -->
               <button id="nav-news-button">NEWS AND EVENT</button>
             </div>
           </div>
 
           <div class="weather-details-container">
             <div class="current-details-container">
-              <div class="detail-left-side">
-                <h1 id="display-weather-temperature"></h1>
-                <p id="display-weather-humidity"></p>
+              <div class="time-grid" style="grid-area: box-1">
+                <p id="display-current-time">2025-06-29 18:00:00</p>
               </div>
 
-              <div class="detail-right-side">
+              <div class="image-grid" style="grid-area: box-2">
                 <img
                   id="display-weather-image"
-                  style="display: none"
-                  src="https://openweathermap.org/img/wn/10d@2x.png"
-                  alt=""
+                  src="https://openweathermap.org/img/wn/01d@2x.png"
                 />
-                <p id="display-weather-condition"></p>
+                <p id="display-weather-condition">Clear</p>
+              </div>
+
+              <div class="detail-grid" style="grid-area: box-3">
+                <img src="/air.svg" alt="" />
+                <p id="display-weather-temperature">25.14</p>
+              </div>
+
+              <div class="detail-grid" style="grid-area: box-4">
+                <img src="/eco.svg" alt="" />
+                <p id="display-weather-humidity">25.14</p>
+              </div>
+
+              <div class="detail-grid" style="grid-area: box-5">
+                <img src="/air.svg" alt="" />
+                <p id="display-weather-feels">25.14</p>
+              </div>
+
+              <div class="detail-grid" style="grid-area: box-6">
+                <img src="/air.svg" alt="" />
+                <p id="display-weather-pressure">1005</p>
               </div>
             </div>
 
@@ -62,10 +83,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="error-container" style="display: none">
-      <p id="display-error">Error</p>
     </div>
 
     <script defer type="module" src="src/pageBackground.js"></script>

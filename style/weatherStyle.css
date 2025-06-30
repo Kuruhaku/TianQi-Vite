@@ -7,10 +7,12 @@ body {
   padding: 0;
   font-family: "Roboto", "Roboto Condensed", "Sansation", sans-serif;
   background-color: black;
-  color: white;
+  color: #fff;
   max-height: 100vh;
   font-size: 16px;
   font-weight: 400;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.02em;
 }
 
 .background-container {
@@ -61,9 +63,10 @@ body {
 }
 
 .location-container h1 {
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-top: 16px;
-  font-size: 3rem;
+  line-height: 1.1;
 }
 
 .location-container img {
@@ -73,15 +76,29 @@ body {
 }
 
 .location-container p {
-  font-size: 1.25rem;
-  margin: 8px 0px;
+  font-size: 1.15em;
+  font-weight: 500;
+  margin: 6px 0;
+  line-height: 1.4;
 }
 
 .area-container p {
   text-align: center;
+  font-size: 1.15em;
+  font-weight: 500;
+  margin: 6px 0;
+  line-height: 1.4;
 }
 
 /* Weather Input Container */
+.input-glass {
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  margin: 0px auto;
+  padding: 30px 70px;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
@@ -91,21 +108,23 @@ body {
 }
 
 .input-container input {
-  width: 220px;
-  height: 40px;
+  width: 320px;
+  height: 45px;
   padding: 0 12px;
-  border: 1.5px solid white;
-  border-radius: 6px;
+  border: 1px solid white;
+  border-radius: 10px;
   text-align: center;
-  font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.08);
-  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #333;
   outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input-container input::placeholder {
-  color: white;
+  color: #333;
 }
 
 .input-container input:focus {
@@ -114,17 +133,18 @@ body {
 }
 
 .input-container button {
-  width: 245px;
-  height: 40px;
+  width: 345px;
+  height: 45px;
   padding: 0px 10px;
   text-align: center;
   background: linear-gradient(90deg, #2196f3 0%, #21cbf3 100%);
   color: #fff;
-  border-radius: 6px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 8px rgba(33, 203, 243, 0.08);
 }
@@ -133,6 +153,13 @@ body {
 .input-container button:focus {
   background-color: linear-gradient(90deg, #21cbf3 0%, #2196f3 100%);
   box-shadow: 0px 4px 16px rgba(33, 203, 243, 0.16);
+}
+
+#display-error {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff0000c0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0);
 }
 
 /* Nav Bar */
@@ -165,66 +192,77 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
+  justify-content: space-evenly;
+  grid-template-columns: 1fr 220px 220px;
   width: 100%;
-  padding: 15px 0px;
-  max-height: 30vh;
+  padding: 21px 0px;
 }
 
 .current-details-container {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
-  padding: 10px 20px;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: 1fr 250px 250px;
+  grid-template-areas:
+    "box-1 box-1 box-1"
+    "box-2 box-3 box-4"
+    "box-2 box-5 box-6";
+  margin: 0px 100px;
+  gap: 15px;
 }
 
-.detail-left-side h1,
-.detail-left-side p,
-.detail-right-side p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+#display-current-time {
+  font-size: 2rem;
+  font-weight: 800;
   margin: 0;
+  letter-spacing: 2px;
 }
 
-.detail-left-side h1 {
-  font-weight: 700;
-  font-size: 3rem;
-  margin-bottom: 14px;
+.image-grid {
+  padding-right: 10px;
 }
 
-.detail-left-side p {
+.image-grid img {
+  width: 90px;
+  height: 90px;
+}
+
+.image-grid p {
   font-size: 1.25rem;
+  margin: 0px;
   text-align: center;
-  border-radius: 5px;
+  font-weight: 500;
 }
 
-.detail-right-side p {
+.detail-grid {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.detail-grid p {
   font-size: 1.25rem;
-  text-align: center;
+  font-weight: 500px;
 }
 
-.detail-right-side img {
-  width: 100px;
+.detail-grid img {
+  width: 56px;
 }
 
+/* Forecast Detail */
 .forecast-details-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 2;
-  gap: 30px;
+  gap: 50px;
 }
 
 .forecast-details-container p {
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 6px 0;
+  line-height: 1.4;
   text-align: center;
-  margin: 10px 0px 5px 0px;
 }
 
 .day-forecast-details {
@@ -236,6 +274,8 @@ body {
   display: block;
   margin: 0px auto;
 }
+
+/* Grid Template */
 
 /* Page Animation */
 .transition-swipe.active {
