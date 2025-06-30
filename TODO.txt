@@ -7,3 +7,4 @@ TODO:
 TODO: Current-detail-container
 > Add card that has the current date.
 > Add current-details-container Feels like: 26.7, wind speed, air pressure.
+> Added rain particle movement if malakas yung rain.

@@ -98,7 +98,8 @@ function displayWeatherData(wData) {
   const displayNavBar = document.querySelector(".nav-bar-container");
 
   getCurrentTime(wData.timezone);
-
+  displayCondition(wData.weather[0].id);
+  // displayCondition(600); // Checking if snow or rain is working.
   // Null Check for error
   if (!wData || wData.main.temp === undefined || wData.sys.country === undefined || wData.name === undefined || wData.main.humidity === undefined || wData.weather[0].main === undefined) {
     console.log('There a Null Data')
@@ -174,6 +175,21 @@ function displayForcastData(fData) {
   }
 
   forecastContainer.innerHTML = storeForecastData;
+}
+
+// Check if the condition is rain or snow.
+function displayCondition(id) {
+  if (id >= 200 && id <= 550) {
+    particlesJS.load('particles-js', 'src/rain.json', function () {
+      console.log('particles.js config loaded');
+    });
+  }
+
+  if (id >= 600 && id < 700) {
+    particlesJS.load('particles-js', 'src/snow.json', function () {
+      console.log('particles.js config loaded');
+    });
+  }
 }
 
 // Get Current Time
