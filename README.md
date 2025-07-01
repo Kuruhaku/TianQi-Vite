@@ -4,14 +4,14 @@ A Weather and News website that utilize API and developed inside HTML, CSS and J
 
 ## Weather Page:
 
-![Weather Page](/picture/Weather_1.png)
-![Weather Page](/picture/Weather_2.png)
+![Weather_1](https://github.com/user-attachments/assets/5af61cb9-121d-465e-8510-4a0df1e56676)
+![Weather_2](https://github.com/user-attachments/assets/6fce6ab3-cda9-4f2b-b0c5-d14ddafbdb8d)
 
 ---
 
 ## News Page:
 
-![News Page](/picture/News_Page.png)
+![News_Page](https://github.com/user-attachments/assets/bc38d018-845f-45a7-b49b-bd12062bb319)
 
 ## Before running the website:
 
