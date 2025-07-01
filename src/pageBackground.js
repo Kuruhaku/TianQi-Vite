@@ -9,11 +9,18 @@ const getDate = DateTime.now()
 const currentHour = getDate.c.hour;
 getBackground(currentHour);
 
-// Logic: NightTime (18-5), DayTime (6-17);
+// Logic: NightTime (18-5), DayTime (6-17).
 export function getBackground(hour) {
   return (hour >= 6) && (hour <= 17) ? dayBackground() : nightBackground();
 }
 
+window.onresize = window.onload = function () {
+
+  let width = this.innerWidth;
+
+}
+
+// Will set the animation on specific background.
 async function setBackground(svg) {
   // Wait for the fade-out transition to finish
   if (weatherBG.classList.contains('nofading')) {
@@ -26,6 +33,19 @@ async function setBackground(svg) {
       weatherBG.classList.add('nofading');
     })
   } else {
+
+    // Check the width of the screen
+    const windowWidth = window.innerWidth;
+    const getSVG = document.querySelector(".background-container svg")
+    if (windowWidth < 835) {
+      getSVG.setAttribute("viewBox", "100 200 600 1000");
+    }
+
+    if (windowWidth < 1200) {
+      getSVG.setAttribute("viewBox", "100 200 1200 1000");
+    }
+
+
     weatherBG.innerHTML = svg;
   }
 }
@@ -33,11 +53,11 @@ async function setBackground(svg) {
 function dayBackground() {
   setBackground(
   /* html */ `
-  <svg viewBox="0 0 1926 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       x="0.00012207"
-      width="1926"
-      height="1080"
+      width="100%"
+      height="100%"
       fill="url(#paint0_linear_4_107)"
     />
     <g filter="url(#filter0_i_4_107)">
@@ -490,12 +510,12 @@ function dayBackground() {
 function nightBackground() {
   setBackground(
   /* html */`
-  <svg viewBox="0 0 1926 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="laptopsvg" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       x="0.00012207"
-      width="1926"
-      height="1080"
-      fill="url(#paint0_linear_27_18)"
+      width="100%"
+      height="100%"
+      fill="url(#paint0_linear_4_107)"
     />
     <g filter="url(#filter0_i_27_18)">
       <path

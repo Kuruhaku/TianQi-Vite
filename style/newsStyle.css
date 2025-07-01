@@ -14,10 +14,6 @@ body {
   font-weight: 400;
 }
 
-main {
-  height: 100vh;
-}
-
 .background-container {
   position: relative;
   overflow: hidden;

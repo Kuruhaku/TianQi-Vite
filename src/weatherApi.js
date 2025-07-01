@@ -100,6 +100,7 @@ function displayWeatherData(wData) {
   getCurrentTime(wData.timezone);
   displayCondition(wData.weather[0].id);
   // displayCondition(600); // Checking if snow or rain is working.
+
   // Null Check for error
   if (!wData || wData.main.temp === undefined || wData.sys.country === undefined || wData.name === undefined || wData.main.humidity === undefined || wData.weather[0].main === undefined) {
     console.log('There a Null Data')
@@ -190,6 +191,10 @@ function displayCondition(id) {
       console.log('particles.js config loaded');
     });
   }
+
+  // Remove the partcile if its not raining or snowing.
+  const particleContainer = document.querySelector("#particles-js");
+  particleContainer.innerHTML = "";
 }
 
 // Get Current Time
