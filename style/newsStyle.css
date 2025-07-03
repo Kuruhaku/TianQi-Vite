@@ -15,15 +15,46 @@ body {
 }
 
 .background-container {
-  position: relative;
+  position: fixed;
+  z-index: -1;
+  transition: opacity 0.5s;
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
-.background-container svg {
-  position: fixed;
+/* Laptop and Tablet SVG Background */
+.laptop {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
   top: 0;
   left: 0;
-  z-index: -1;
+  overflow: hidden;
+}
+
+.laptop-background {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* Mobile SVG Background */
+.mobile {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.mobile-background {
+  width: 100vw;
+  height: 100vh;
+  display: block;
 }
 
 /* News Nav Bar */
@@ -197,5 +228,13 @@ body {
 @media (max-width: 600px) {
   .news-container {
     margin: 10px 50px;
+  }
+
+  .laptop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
   }
 }
