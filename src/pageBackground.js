@@ -2,17 +2,17 @@ import { DateTime } from "luxon";
 
 const weatherBG = document.querySelector(".background-container");
 
-// Only render the default background base on local time.
+// ==== Only render the default background base on local time. ====
 const getDate = DateTime.now()
 const currentHour = getDate.c.hour;
 getBackground(currentHour);
 
-// Logic: NightTime (18-5), DayTime (6-17).
+// ==== Logic: NightTime (18-5), DayTime (6-17). =====
 export function getBackground(hour) {
   return (hour >= 6) && (hour <= 17) ? dayBackground() : nightBackground();
 }
 
-// Will set the animation on specific background.
+// ==== Will set the animation on specific background. ====
 function setBackground(svg) {
   // Wait for the fade-out transition to finish
   if (weatherBG.classList.contains('nofading')) {
@@ -29,20 +29,7 @@ function setBackground(svg) {
   }
 }
 
-//
-// function nightSVGBackground() {
-//   const weather_sky = document.querySelector(".sky");
-//   const weather_cloud = document.querySelector(".cloud");
-//   const weather_solar = document.querySelector(".solar");
-//   const backMountain = document.querySelector(".back-mountain");
-//   const middleMountain = document.querySelector(".middle-mountain");
-//   const frontMountain = document.querySelector(".front-mountain");
-//   const frontTree = document.querySelector(".front-tree");
-//   const backTree = document.querySelector(".back-tree");
-
-//   frontTree.style.fill = "#223C4A";
-// }
-
+// ==== Day Background Rendering ====
 function dayBackground() {
   setBackground(
   /* html */ `
@@ -790,6 +777,7 @@ function dayBackground() {
   `);
 }
 
+// ==== Night Background Rendering ====
 function nightBackground() {
   setBackground(
   /* html */`

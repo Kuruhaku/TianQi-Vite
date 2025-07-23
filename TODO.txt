@@ -1,7 +1,5 @@
-TODO:
-> Make the website responsive.
+TODO: General
 > Adjust the svg add clouds, adjust the tree and give more texture in sun and moon.
-> Add particle js if its going to rain or snow.
 > Fix the UI in weather page in detail area.
 
 TODO: Current-detail-container
@@ -10,6 +8,15 @@ TODO: Current-detail-container
 > Added rain particle movement if malakas yung rain.
 > Add Foggy Area
 
+TODO: In Weather API:
+> There an input that will listen to the user input and get what data sys.is need to display.
+> Display must be hiden and it will only show when the user only has already give a value.
+> It must display the country, area, temperature, humidity, weather condition and current date. (more to add).
+> It must catch an error if there country same as the user input.
+> Make the information stay even has been move from other site.
 
-Need In order to make this application working:
-> npm install luxon
+IMPORTANT: Necessary Package in order to make this application working:
+> npm install luxon (for time functionality)
+> npm install express (for the backend)
+> npm install dotenv (for .env)
+> npm install cors (for cross origin)
