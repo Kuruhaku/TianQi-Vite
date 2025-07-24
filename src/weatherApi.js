@@ -1,12 +1,6 @@
 import { DateTime } from "luxon";
 import { getBackground } from "./pageBackground";
 
-// TODO: There an input that will listen to the user input and get what data sys.is need to display.
-// TODO: Display must be hiden and it will only show when the user only has already give a value.
-// TODO: It must display the country, area, temperature, humidity, weather condition and current date. (more to add).
-// TODO: It must catch an error if there country same as the user input.
-// TODO: Make the information stay even has been move from other site.
-
 // There must be a function for getting the data, error, and displaying the data.
 const getWeatherButton = document.querySelector("#get-weather-button");
 const weatherInput = document.querySelector("#weather-input");
