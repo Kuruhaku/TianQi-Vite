@@ -10,23 +10,21 @@ import { getBackground } from "./pageBackground";
 const navWeatherButton = document.querySelector("#nav-weather-button");
 
 // Getting the value;
-const urlParam = new URLSearchParams(window.location.search);
-const receivedCountryName = urlParam.get('countryName');
-const receivedCountryInput = urlParam.get('countryInput');
-const receivedCountryTime = urlParam.get('countryTime')
+const receivedCountryName = localStorage.getItem("inputCountry");
+const receivedCountryTime = localStorage.getItem("countryTime");
 
-// Routing and Getting the value;
+// Page Transition and Routing
 navWeatherButton.addEventListener("click", function () {
   const transitionPage = document.querySelector(".transition-swipe")
   transitionPage.classList.remove('nonactive');
   transitionPage.classList.add('active');
 
   transitionPage.addEventListener('animationend', function () {
-    window.location.href = `/index.html?countryName=${encodeURIComponent(receivedCountryName)}&countryInput=${encodeURIComponent(receivedCountryInput)}`;
+    window.location.href = `/index.html`;
   })
-
 })
 
+// In order to have exact background with index.html
 getBackground(receivedCountryTime);
 
 // Check if there is user value
@@ -38,11 +36,9 @@ if (!receivedCountryName) {
 }
 
 // Get data from the API for news.
-async function getNewsApi(userInput) {
-  const newsKey = "pub_3dd621466249494288296d92753d4982";
-
+async function getNewsApi(countryName) {
   try {
-    const newsResponse = await fetch(`https://newsdata.io/api/1/latest?apikey=${newsKey}&country=${userInput}`);
+    const newsResponse = await fetch(`http://localhost:8080/api/news?countryName=${countryName}`);
     const newsData = await newsResponse.json();
     console.log(newsData);
     displayNews(newsData);

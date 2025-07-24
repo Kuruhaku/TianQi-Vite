@@ -14,14 +14,10 @@ const showError = document.querySelector("#display-error");
 const errorContainer = document.querySelector(".error-container");
 const navNewsButton = document.querySelector("#nav-news-button");
 
-// Get value from the URL (Must fix this becuase of the new API);
-const getData = new URLSearchParams(window.location.search).get('countryInput');
+const userInput = localStorage.getItem("userInput");
+console.log(userInput);
+getWeatherData(userInput);
 
-// This if there are data in URL.
-if (getData) {
-  weatherInput.value = getData;
-  getWeatherData(getData);
-}
 
 // Listen and Get the value of the User Input
 getWeatherButton.addEventListener("click", function () {
@@ -40,47 +36,36 @@ getWeatherButton.addEventListener("click", function () {
 
 // Function for getting the data.
 async function getWeatherData(userInput) {
-  // TODO: For future feature make a backend that handle the http request to hide the key.
-  const apiKey = "8b9e2e908d291437b12efe817b0886e6";
-  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather/?q=${userInput}&appid=${apiKey}`);
+  const weatheResponse = await fetch(`http://localhost:8080/api/weather?queryWeather=${userInput}`);
+  const weatherData = await weatheResponse.json();
+  console.log(weatherData)
 
-  if (!response.ok) { // Checking if there 404 Not Found
+  if (!weatheResponse.ok) { // Checking if there 404 Not Found
     displayError(`⚠️ Weather data not found`);
   } else {
-    const data = await response.json();
     try {
-      const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}`)
+      localStorage.setItem("inputCountry", weatherData.sys.country) // Store what country the user input, that will be use in news API.
+      localStorage.setItem("userInput", userInput)
+      const forecastResponse = await fetch(`http://localhost:8080/api/weather/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`)
       const forecastData = await forecastResponse.json();
-      getCountryData(data.sys.country);
-      displayWeatherData(data);
-      displayForcastData(forecastData);
-      console.log(data);
       console.log(forecastData);
+      displayWeatherData(weatherData);
+      displayForcastData(forecastData);
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-//  This function get the varriable inside getWeatherData ("data")
-let countryData = "";
-function getCountryData(functionData) {
-  countryData = functionData;
-}
-
-let countryTime = "";
-function getCountryTime(functionTime) {
-  countryTime = functionTime
-}
-
+// Page Transitions and Routing
 navNewsButton.addEventListener("click", async function () {
   const transitionPage = document.querySelector(".transition-swipe");
   transitionPage.classList.remove("nonactive");
   transitionPage.classList.add("active");
 
-  // Waiting for the Animation to End and Routing and Getting the value
+  // Waiting for the Animation to End and Routing
   transitionPage.addEventListener('animationend', () => {
-    window.location.href = `/newsPage.html?countryName=${encodeURIComponent(countryData)}&countryInput=${encodeURIComponent(weatherInput.value)}&countryTime=${encodeURIComponent(countryTime)}`
+    window.location.href = `/newsPage.html`
   })
 })
 
@@ -109,6 +94,10 @@ function displayWeatherData(wData) {
   const nowTime = DateTime.utc().plus({ seconds: wData.timezone });
   const formatNow = nowTime.toFormat('yyyy LLL dd (HH:mm:ss)');
 
+  // Display Data
+  displayCountry.innerText = wData.sys.country; // print out the country.
+  displayArea.innerText = wData.name; // print out the name.
+
   // Style Modification
   errorContainer.style.display = "none";
   displayAreaImage.style.display = "block";
@@ -117,10 +106,6 @@ function displayWeatherData(wData) {
   displayWeatherContainer.style.alignItems = "normal";
   displayNavBar.style.display = "flex";
   displayDetail.style.display = "flex";
-
-  // Display Data
-  displayCountry.innerText = wData.sys.country; // print out the country.
-  displayArea.innerText = wData.name; // print out the name.
 
   const displayCurrent = document.querySelector('.current-details-container')
   displayCurrent.innerHTML =
@@ -159,6 +144,7 @@ function displayWeatherData(wData) {
   `
 }
 
+// ==== Handle and Render Forecaste Data ====
 function displayForcastData(fData) {
   const forecastContainer = document.querySelector(".forecast-details-container")
   const newDayArray = [3, 11, 19, 27, 35];
@@ -181,13 +167,13 @@ function displayForcastData(fData) {
 // Check if the condition is rain or snow.
 function displayCondition(id) {
   if (id >= 200 && id <= 550) {
-    particlesJS.load('particles-js', 'src/rain.json', function () {
+    particlesJS.load('particles-js', 'src/particles/rain.json', function () {
       console.log('particles.js config loaded');
     });
   }
 
   if (id >= 600 && id < 700) {
-    particlesJS.load('particles-js', 'src/snow.json', function () {
+    particlesJS.load('particles-js', 'src/particles/snow.json', function () {
       console.log('particles.js config loaded');
     });
   }
@@ -215,6 +201,12 @@ function getCurrentTime(offsetSeconds = 0) {
   displayCountryTime.innerHTML = `${formatTime} ${timePeriod}`;
   getBackground(Hourtime);
   getCountryTime(Hourtime);
+}
+
+let countryTime = "";
+function getCountryTime(functionTime) {
+  localStorage.setItem("countryTime", functionTime);
+  countryTime = functionTime
 }
 
 // Handling Error
