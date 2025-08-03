@@ -15,7 +15,17 @@ A Weather and News website that utilize API and developed inside HTML, CSS and J
 
 ## Before running the website:
 
-1. Install luxon.js (Handle date and time for different time zone)
+1. API Key for weather and news.
+
+```
+https://openweathermap.org/api
+```
+
+```
+https://newsdata.io/
+```
+
+2. Install luxon.js (Handle date and time for different time zone)
 
 ```
 npm install luxon
@@ -25,8 +35,22 @@ npm install luxon
 npm install full-icu
 ```
 
-2. Install particle.js (Particle for rain and snow weather condition)
+3. Install particle.js (Particle for rain and snow weather condition)
 
 ```
 npm i particles.js
+```
+
+4. Install for backend functionality
+
+```
+npm install express
+```
+
+```
+npm install dotenv
+```
+
+```
+npm install cors
 ```
